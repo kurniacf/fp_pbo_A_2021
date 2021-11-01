@@ -1,25 +1,49 @@
 package jade;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.JFrame;
 
 import util.Time;
 
 public class Window extends JFrame implements Runnable{
 	
+	public ML mouseListener;
+	public KL keyListener;
+	
 	private static Window window = null;
 	private boolean isRunning = true;
+	private Scene currentScene = null;
 	
 	public Window() {
+		this.mouseListener = new ML();
+		this.keyListener = new KL();
+		
 		this.setSize(1280, 720);
 		this.setTitle("Shape Rush");
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.addKeyListener(keyListener);
+		this.addMouseListener(mouseListener);
+		this.addMouseMotionListener(mouseListener);
 		this.setLocationRelativeTo(null);
 	}
 	
 	public void init() {
-		
+		changeScene(0);
+	}
+	
+	public void changeScene(int scene) {
+		switch (scene) {
+			case 0: 
+				currentScene = new LevelEditorScene("Level Editor");
+				break;
+			default:
+				System.out.println("Do Nothing in This Scene");
+				currentScene = null;
+				break;
+		}
 	}
 	
 	public static Window getWindow() {
@@ -30,7 +54,7 @@ public class Window extends JFrame implements Runnable{
 	}
 	
 	public void update(double up) {
-		System.out.println(up);
+		currentScene.update(up);
 	}
 	
 	@Override
@@ -41,7 +65,7 @@ public class Window extends JFrame implements Runnable{
 				double time = Time.getTime();
 				double deltaTime = time - lastFrameTime;
 				lastFrameTime = time;
-				update(time);
+				update(deltaTime);
 			}
 		} catch(Exception exc) {
 			exc.printStackTrace();
