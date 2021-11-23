@@ -28,14 +28,20 @@ public class LevelEditorScene extends Scene{
 				layerTwo.sprites.get(0),
 				layerThree.sprites.get(0),
 				Color.RED,
-				Color.BLUE
+				Color.MAGENTA
 		);
 		player.addComponent(playerComp);
+		
+		player.transform.rotation = 45;
+		player.transform.scale.x = 2.0f;
+		player.transform.scale.y = 2.0f;
 	}
 
 	@Override
 	public void update(double up) {
 		player.update(up);
+		player.transform.rotation += up * 1f;
+		
 	}
 
 	@Override

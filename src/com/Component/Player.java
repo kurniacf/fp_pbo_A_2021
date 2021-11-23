@@ -2,6 +2,7 @@ package com.Component;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 import com.jade.Component;
 import com.util.Constants;
@@ -33,7 +34,7 @@ public class Player extends Component {
 			for(int x = 0; x < layerTwo.image.getHeight(); x++) {
 				Color color = new Color(layerTwo.image.getRGB(x, y));
 				if(color.getRed() > threshold || color.getGreen() > threshold || color.getBlue() > threshold) {
-					layerTwo.image.setRGB(x, y, colorOne.getRGB());
+					layerTwo.image.setRGB(x, y, colorTwo.getRGB());
 				}
 			}
 		}
@@ -41,9 +42,15 @@ public class Player extends Component {
 	
 	@Override 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(layerOne.image, (int)gameObject.transform.position.x, (int)gameObject.transform.position.y, this.width, this.height, null);
-		g2.drawImage(layerTwo.image, (int)gameObject.transform.position.x, (int)gameObject.transform.position.y, this.width, this.height, null);
-		g2.drawImage(layerThree.image, (int)gameObject.transform.position.x, (int)gameObject.transform.position.y, this.width, this.height, null);
+		AffineTransform transform = new AffineTransform();
+		transform.setToIdentity();
+		transform.translate(gameObject.transform.position.x, gameObject.transform.position.y);
+		transform.rotate(gameObject.transform.rotation, width / 2.0, height / 2.0);
+		transform.scale(gameObject.transform.scale.x, gameObject.transform.scale.y);
+		g2.drawImage(layerOne.image, transform, null);
+		g2.drawImage(layerTwo.image, transform, null);
+		g2.drawImage(layerThree.image, transform, null);
+		
 	}
 	
 }
