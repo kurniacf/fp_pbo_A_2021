@@ -32,24 +32,26 @@ public class LevelEditorScene extends Scene{
 		);
 		player.addComponent(playerComp);
 		
-		player.transform.rotation = 45;
-		player.transform.scale.x = 2.0f;
-		player.transform.scale.y = 2.0f;
+		renderer.submit(player);
+		
+		//player.transform.rotation = 45;
+		//player.transform.scale.x = 2.0f;
+		//player.transform.scale.y = 2.0f;
 	}
 
 	@Override
 	public void update(double up) {
 		player.update(up);
 		player.transform.rotation += up * 1f;
-		
+		camera.position.x += up * 60f;
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.setColor(Color.BLUE);
+		g2.setColor(new Color(46, 91, 238));
 		g2.fillRect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 	
-		player.draw(g2);
+		renderer.render(g2);
 	}
 	
 }
