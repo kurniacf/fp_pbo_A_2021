@@ -3,7 +3,9 @@ package com.jade;
 import java.awt.*;
 
 import com.Component.BoxBounds;
+import com.Component.Ground;
 import com.Component.Player;
+import com.Component.Rigidbody;
 import com.Component.Spritesheet;
 import com.dataStructure.AssetPool;
 import com.dataStructure.Transform;
@@ -11,11 +13,20 @@ import com.util.Constants;
 import com.util.Vector2;
 
 public class LevelEditorScene extends Scene{
-	GameObject player;
+	static LevelEditorScene currentScene;
+	public GameObject player;
+	GameObject ground;
+	
 	public LevelEditorScene(String name) {
 		super.Scene(name);
 	}
 	
+	public static LevelEditorScene getScene() {
+		if(LevelEditorScene.currentScene == null) {
+			LevelEditorScene.currentScene = new LevelEditorScene("Scene");
+		}
+		return LevelEditorScene.currentScene;
+	}
 	
 	@Override
 	public void init() {
@@ -31,8 +42,16 @@ public class LevelEditorScene extends Scene{
 				Color.MAGENTA
 		);
 		player.addComponent(playerComp);
+		player.addComponent(new Rigidbody(new Vector2(30, 0)));
+		player.addComponent(new BoxBounds(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT));
+		gameObjects.add(player);
+		
+		ground = new GameObject("Ground", new Transform(new Vector2(0, Constants.GROUND_Y)));
+		ground.addComponent(new Ground());
+		gameObjects.add(ground);
 		
 		renderer.submit(player);
+		renderer.submit(ground);
 		
 		//player.transform.rotation = 45;
 		//player.transform.scale.x = 2.0f;
@@ -41,9 +60,24 @@ public class LevelEditorScene extends Scene{
 
 	@Override
 	public void update(double up) {
-		player.update(up);
-		player.transform.rotation += up * 1f;
-		camera.position.x += up * 60f;
+		if(player.transform.position.x - camera.position.x > Constants.CAMERA_OFFSET_X) {
+			camera.position.x = player.transform.position.x - Constants.CAMERA_OFFSET_X;
+		}
+		
+		if(player.transform.position.y - camera.position.y > Constants.CAMERA_OFFSET_Y) {
+			camera.position.y = player.transform.position.y - Constants.CAMERA_OFFSET_Y;
+		}
+		
+		if(camera.position.y > Constants.CAMERA_OFFSET_GROUND_Y) {
+			camera.position.y = Constants.CAMERA_OFFSET_GROUND_Y;
+		}
+		
+		for(GameObject g : gameObjects) {
+			g.update(up);
+		}
+		
+		//player.transform.scale = new Vector2(3, 3);
+		//camera.position.y += up * 60f;
 	}
 
 	@Override
