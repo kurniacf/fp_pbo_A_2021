@@ -3,6 +3,8 @@ package com.jade;
 import java.awt.*;
 
 import com.Component.BoxBounds;
+import com.Component.CameraControls;
+import com.Component.Grid;
 import com.Component.Ground;
 import com.Component.Player;
 import com.Component.Rigidbody;
@@ -15,6 +17,8 @@ import com.util.Vector2;
 public class LevelEditorScene extends Scene{
 	public GameObject player;
 	GameObject ground;
+	Grid grid;
+	CameraControls cameraControls;
 	
 	public LevelEditorScene(String name) {
 		super.Scene(name);
@@ -22,6 +26,8 @@ public class LevelEditorScene extends Scene{
 	
 	@Override
 	public void init() {
+		grid = new Grid();
+		cameraControls = new CameraControls();
 		player = new GameObject("Some game object", new Transform(new Vector2(500.0f, 350.0f)));
 		Spritesheet layerOne = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13*5);
 		Spritesheet layerTwo = new Spritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13*5);
@@ -50,13 +56,6 @@ public class LevelEditorScene extends Scene{
 
 	@Override
 	public void update(double up) {
-		if(player.transform.position.x - camera.position.x > Constants.CAMERA_OFFSET_X) {
-			camera.position.x = player.transform.position.x - Constants.CAMERA_OFFSET_X;
-		}
-		
-		if(player.transform.position.y - camera.position.y > Constants.CAMERA_OFFSET_Y) {
-			camera.position.y = player.transform.position.y - Constants.CAMERA_OFFSET_Y;
-		}
 		
 		if(camera.position.y > Constants.CAMERA_OFFSET_GROUND_Y) {
 			camera.position.y = Constants.CAMERA_OFFSET_GROUND_Y;
@@ -65,6 +64,9 @@ public class LevelEditorScene extends Scene{
 		for(GameObject g : gameObjects) {
 			g.update(up);
 		}
+		cameraControls.update(up);
+		grid.update(up);
+		
 		
 		//player.transform.scale = new Vector2(3, 3);
 		//camera.position.y += up * 60f;
@@ -76,6 +78,7 @@ public class LevelEditorScene extends Scene{
 		g2.fillRect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 	
 		renderer.render(g2);
+		grid.draw(g2);
 	}
 	
 }
