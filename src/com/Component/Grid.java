@@ -4,8 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
-import java.awt.geom.Line2D.Float;
-
 import com.jade.Camera;
 import com.jade.Component;
 import com.jade.Window;
@@ -38,6 +36,7 @@ public class Grid extends Component{
 		float startY = (float)Math.floor(camera.position.y / gridHeight) * gridHeight - camera.position.y;
 		
 		for(int column = 0; column <= numYLines; column++) {
+			//g2.draw(new Line2D.Float(startX, 0, startX, Constants.SCREEN_HEIGHT));
 			g2.draw(new Line2D.Float(startX, 0, startX, bottom));
 			startX += gridWidth;
 		}

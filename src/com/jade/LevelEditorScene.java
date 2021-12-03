@@ -22,6 +22,7 @@ public class LevelEditorScene extends Scene{
 	
 	public LevelEditorScene(String name) {
 		super.Scene(name);
+		//grid = new Grid();
 	}
 	
 	@Override
@@ -48,10 +49,6 @@ public class LevelEditorScene extends Scene{
 		
 		addGameObject(player);
 		addGameObject(ground);
-		
-		//player.transform.rotation = 45;
-		//player.transform.scale.x = 2.0f;
-		//player.transform.scale.y = 2.0f;
 	}
 
 	@Override
@@ -66,10 +63,6 @@ public class LevelEditorScene extends Scene{
 		}
 		cameraControls.update(up);
 		grid.update(up);
-		
-		
-		//player.transform.scale = new Vector2(3, 3);
-		//camera.position.y += up * 60f;
 	}
 
 	@Override
