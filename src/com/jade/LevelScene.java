@@ -1,24 +1,26 @@
 package com.jade;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 
 import com.Component.BoxBounds;
 import com.Component.Ground;
 import com.Component.Player;
 import com.Component.Rigidbody;
 import com.Component.Spritesheet;
-import com.dataStructure.AssetPool;
 import com.dataStructure.Transform;
 import com.util.Constants;
 import com.util.Vector2;
 
-public class LevelEditorScene extends Scene{
+public class LevelScene extends Scene {
+	static LevelScene currentScene;
 	public GameObject player;
-	GameObject ground;
 	
-	public LevelEditorScene(String name) {
+	
+	public LevelScene(String name) {
 		super.Scene(name);
 	}
+	
 	
 	@Override
 	public void init() {
@@ -34,11 +36,12 @@ public class LevelEditorScene extends Scene{
 				Color.MAGENTA
 		);
 		player.addComponent(playerComp);
-
+		player.addComponent(new Rigidbody(new Vector2(395, 0)));
+		player.addComponent(new BoxBounds(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT));
 		
+		GameObject ground;
 		ground = new GameObject("Ground", new Transform(new Vector2(0, Constants.GROUND_Y)));
 		ground.addComponent(new Ground());
-
 		
 		addGameObject(player);
 		addGameObject(ground);
@@ -77,5 +80,4 @@ public class LevelEditorScene extends Scene{
 	
 		renderer.render(g2);
 	}
-	
 }

@@ -11,6 +11,7 @@ public class Window extends JFrame implements Runnable{
 	
 	public ML mouseListener;
 	public KL keyListener;
+	public boolean isInEditor = true;
 	
 	private static Window window = null;
 	private boolean isRunning = true;
@@ -37,10 +38,19 @@ public class Window extends JFrame implements Runnable{
 		changeScene(0);
 	}
 	
+	public Scene getCurrentScene() {
+		return currentScene;
+	}
+	
 	public void changeScene(int scene) {
 		switch (scene) {
 			case 0: 
-				currentScene = LevelEditorScene.getScene();
+				isInEditor = true;
+				currentScene = new LevelEditorScene("Level Editor");
+				break;
+			case 1:
+				isInEditor = false;
+				currentScene = new LevelScene("Level");
 				break;
 			default:
 				System.out.println("Do Nothing in This Scene");

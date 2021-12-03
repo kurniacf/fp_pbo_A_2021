@@ -8,7 +8,7 @@ import com.util.Vector2;
 
 public abstract class Scene {
 	String name;
-	Camera camera;
+	public Camera camera;
 	List<GameObject> gameObjects;
 	Renderer renderer;
 	
@@ -23,6 +23,12 @@ public abstract class Scene {
 	public void init() {
 		
 	};
+	
+	public void addGameObject(GameObject g) {
+		gameObjects.add(g);
+		renderer.submit(g);
+	}
+	
 	public abstract void update(double up);
 	public abstract void draw(Graphics2D g2);
 	
