@@ -8,6 +8,8 @@ import com.Component.Grid;
 import com.Component.Ground;
 import com.Component.Player;
 import com.Component.Rigidbody;
+import com.Component.SnapToGrid;
+import com.Component.Sprite;
 import com.Component.Spritesheet;
 import com.dataStructure.AssetPool;
 import com.dataStructure.Transform;
@@ -19,6 +21,8 @@ public class LevelEditorScene extends Scene{
 	GameObject ground;
 	Grid grid;
 	CameraControls cameraControls;
+	GameObject mouseCursor;
+	//SnapToGrid snapToGrid;
 	
 	public LevelEditorScene(String name) {
 		super.Scene(name);
@@ -29,6 +33,13 @@ public class LevelEditorScene extends Scene{
 	public void init() {
 		grid = new Grid();
 		cameraControls = new CameraControls();
+		
+		Spritesheet objects = new Spritesheet("assets/spritesheet.png", 42, 42, 2, 6, 12);
+		Sprite mouseSprite = objects.sprites.get(0);
+		mouseCursor = new GameObject("Mouse Cursor", new Transform(new Vector2()));
+		mouseCursor.addComponent(new SnapToGrid(Constants.TILE_WIDTH, Constants.TILE_HEIGHT));
+		mouseCursor.addComponent(mouseSprite);
+		
 		player = new GameObject("Some game object", new Transform(new Vector2(500.0f, 350.0f)));
 		Spritesheet layerOne = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13*5);
 		Spritesheet layerTwo = new Spritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13*5);
@@ -63,6 +74,7 @@ public class LevelEditorScene extends Scene{
 		}
 		cameraControls.update(up);
 		grid.update(up);
+		mouseCursor.update(up);
 	}
 
 	@Override
@@ -72,6 +84,7 @@ public class LevelEditorScene extends Scene{
 	
 		renderer.render(g2);
 		grid.draw(g2);
+		mouseCursor.draw(g2);
 	}
 	
 }

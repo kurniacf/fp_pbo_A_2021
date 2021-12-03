@@ -47,4 +47,8 @@ public class Grid extends Component{
 			}
 		}
 	}
+	@Override
+	public Component copy() {
+		return null;
+	}
 }
