@@ -17,7 +17,7 @@ public class Player extends Component {
     public PlayerState state;
 
     public Player(Sprite layerOne, Sprite layerTwo, Sprite layerThree, Color colorOne, Color colorTwo) {
-        this.spaceship = AssetPool.getSprite("assets/player/spaceship.png");
+        this.spaceship = AssetPool.getSprite("assets/player/spaceship02.png");
         this.width = Constants.PLAYER_WIDTH;
         this.height = Constants.PLAYER_HEIGHT;
         this.layerOne = layerOne;

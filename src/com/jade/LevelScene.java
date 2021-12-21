@@ -31,7 +31,7 @@ public class LevelScene extends Scene {
         Spritesheet layerOne = AssetPool.getSpritesheet("assets/player/layerOne.png");
         Spritesheet layerTwo = AssetPool.getSpritesheet("assets/player/layerTwo.png");
         Spritesheet layerThree = AssetPool.getSpritesheet("assets/player/layerThree.png");
-        Player playerComp = new Player(layerOne.sprites.get(0), layerTwo.sprites.get(0), layerThree.sprites.get(0), Color.ORANGE, Color.MAGENTA);
+        Player playerComp = new Player(layerOne.sprites.get(0), layerTwo.sprites.get(0), layerThree.sprites.get(0), Constants.BOX_IN, Constants.BOX_OUT);
         player.addComponent(playerComp);
         player.addComponent(new Rigidbody(new Vector2(Constants.PLAYER_SPEED, 0)));
         playerBounds = new BoxBounds(Constants.TILE_WIDTH - 2, Constants.TILE_HEIGHT - 2);
@@ -50,7 +50,7 @@ public class LevelScene extends Scene {
         GameObject[] backgrounds = new GameObject[numBackgrounds];
         GameObject[] groundBgs = new GameObject[numBackgrounds];
         for (int i=0; i < numBackgrounds; i++) {
-            ParallaxBackground bg = new ParallaxBackground("assets/backgrounds/bg01.png", backgrounds, ground.getComponent(Ground.class), false);
+            ParallaxBackground bg = new ParallaxBackground("assets/backgrounds/bg03.png", backgrounds, ground.getComponent(Ground.class), false);
             int x = i * bg.sprite.width;
             int y = 0;
 
@@ -58,7 +58,7 @@ public class LevelScene extends Scene {
             go.setUi(true);
             go.addComponent(bg);
             backgrounds[i] = go;
-            ParallaxBackground groundBg = new ParallaxBackground("assets/grounds/ground01.png", groundBgs, ground.getComponent(Ground.class), true);
+            ParallaxBackground groundBg = new ParallaxBackground("assets/grounds/ground03.png", groundBgs, ground.getComponent(Ground.class), true);
             x = i * groundBg.sprite.width;
             y = bg.sprite.height;
             GameObject groundGo = new GameObject("GroundBg", new Transform(new Vector2(x, y)), -9);

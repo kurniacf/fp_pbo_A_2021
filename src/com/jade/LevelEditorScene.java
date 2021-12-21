@@ -46,7 +46,7 @@ public class LevelEditorScene extends Scene {
         Spritesheet layerOne = AssetPool.getSpritesheet("assets/player/layerOne.png");
         Spritesheet layerTwo = AssetPool.getSpritesheet("assets/player/layerTwo.png");
         Spritesheet layerThree = AssetPool.getSpritesheet("assets/player/layerThree.png");
-        Player playerComp = new Player(layerOne.sprites.get(0), layerTwo.sprites.get(0), layerThree.sprites.get(0), Color.ORANGE, Color.MAGENTA);
+        Player playerComp = new Player(layerOne.sprites.get(0), layerTwo.sprites.get(0), layerThree.sprites.get(0), Constants.BOX_IN, Constants.BOX_OUT);
         player.addComponent(playerComp);
         player.setNonserializable();
         addGameObject(player);
@@ -75,7 +75,7 @@ public class LevelEditorScene extends Scene {
         GameObject[] backgrounds = new GameObject[numBackgrounds];
         GameObject[] groundBgs = new GameObject[numBackgrounds];
         for (int i=0; i < numBackgrounds; i++) {
-            ParallaxBackground bg = new ParallaxBackground("assets/backgrounds/bg01.png", null, ground.getComponent(Ground.class), false);
+            ParallaxBackground bg = new ParallaxBackground("assets/backgrounds/bg03.png", null, ground.getComponent(Ground.class), false);
             int x = i * bg.sprite.width;
             int y = 0;
 
@@ -85,7 +85,7 @@ public class LevelEditorScene extends Scene {
             go.setNonserializable();
             backgrounds[i] = go;
 
-            ParallaxBackground groundBg = new ParallaxBackground("assets/grounds/ground01.png", null, ground.getComponent(Ground.class), true);
+            ParallaxBackground groundBg = new ParallaxBackground("assets/grounds/ground03.png", null, ground.getComponent(Ground.class), true);
             x = i * groundBg.sprite.width;
             y = (int)ground.transform.position.y;
             GameObject groundGo = new GameObject("GroundBg", new Transform(new Vector2(x, y)), -9);
