@@ -2,6 +2,8 @@
 
 > This is a final project object oriented programming lecture course
 
+> Adaptation from GamesWithGabe (https://youtube.com/playlist?list=PLtrSb4XxIVbpSD7Gv0GLtMtKxrFmmS3K2 or https://intip.in/PlaylistGamesWithGabeGeometry)
+
 by :
 
 1. Monica Narda Davita 5025201009
