@@ -47,3 +47,5 @@ Gameplay
 Plane Mode
 |:-:|
 |<a href="https://user-images.githubusercontent.com/70510279/145348373-a88d80fe-0740-4953-b33e-a9cd00e6695f.png"><img src="https://user-images.githubusercontent.com/70510279/145348373-a88d80fe-0740-4953-b33e-a9cd00e6695f.png" alt="Plane Mode" width="400"></a><br /><sup><a href="https://user-images.githubusercontent.com/70510279/145348373-a88d80fe-0740-4953-b33e-a9cd00e6695f.png">(view full size)</a> |
+
+ 
